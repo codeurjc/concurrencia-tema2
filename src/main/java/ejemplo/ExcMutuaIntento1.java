@@ -2,24 +2,24 @@ package ejemplo;
 
 import static es.urjc.etsii.code.concurrency.SimpleConcurrent.*;
 
-public class ExcMutua1 {
+public class ExcMutuaIntento1 {
 
-	private static volatile int turno;
+	private static volatile boolean ocupado;
 
 	public static void p1() {
 		
 		for (int i = 0; i < 5; i++) {
-			// Preprotocolo
-			while (turno != 1) {}
+			
+			while (ocupado);
+			ocupado = true;
 
-			// Sección Crítica
+			// Sección bajo EM
 			printlnI("P1_EM1 ");
 			printlnI("P1_EM2 ");
 
-			// Postprotocolo
-			turno = 2;
+			ocupado = false;
 
-			// Sección No Crítica
+			// Sección sin EM
 			printlnI("P1_1 ");
 			printlnI("P1_2 ");
 		}
@@ -28,25 +28,25 @@ public class ExcMutua1 {
 	public static void p2() {
 
 		for (int i = 0; i < 5; i++) {
-			// Preprotocolo
-			while (turno != 2) {}
+			
+			while (ocupado);
+			ocupado = true;
 
-			// Sección Crítica
-			printlnI("P2_EM1 ");
-			printlnI("P2_EM2 ");
+			// Sección bajo EM
+			printlnI("P1_EM1 ");
+			printlnI("P1_EM2 ");
 
-			// Postprotocolo
-			turno = 1;
+			ocupado = false;
 
-			// Sección No Crítica
-			printlnI("P2_1 ");
-			printlnI("P2_2 ");
+			// Sección sin EM
+			printlnI("P1_1 ");
+			printlnI("P1_2 ");
 		}
 	}
 
 	public static void main(String[] args) {
 
-		turno = 1;
+		ocupado = false;
 
 		createThread("p1");
 		createThread("p2");
