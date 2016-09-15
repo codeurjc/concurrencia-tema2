@@ -13,15 +13,15 @@ public class ExcMutua1 {
 			while (turno != 1) {}
 
 			// Sección Crítica
-			printlnI("P1_SC1 ");
-			printlnI("P1_SC2 ");
+			printlnI("P1_EM1 ");
+			printlnI("P1_EM2 ");
 
 			// Postprotocolo
 			turno = 2;
 
 			// Sección No Crítica
-			printlnI("P1_SNC1 ");
-			printlnI("P1_SNC2 ");
+			printlnI("P1_1 ");
+			printlnI("P1_2 ");
 		}
 	}
 
@@ -32,15 +32,15 @@ public class ExcMutua1 {
 			while (turno != 2) {}
 
 			// Sección Crítica
-			printlnI("P2_SC1 ");
-			printlnI("P2_SC2 ");
+			printlnI("P2_EM1 ");
+			printlnI("P2_EM2 ");
 
 			// Postprotocolo
 			turno = 1;
 
 			// Sección No Crítica
-			printlnI("P2_SNC1 ");
-			printlnI("P2_SNC2 ");
+			printlnI("P2_1 ");
+			printlnI("P2_2 ");
 		}
 	}
 
